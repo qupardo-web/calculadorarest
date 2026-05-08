@@ -1,15 +1,21 @@
 package cl.usm.calculadoraspring.services;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculadoraServiceTest {
 
+    CalculadoraService calculadoraService;
+
+    @BeforeEach
+    void setUp(){
+        calculadoraService = new CalculadoraService();
+    }
+
     @Test
     void calcularSumaOk() {
-        CalculadoraService calculadoraService = new CalculadoraService();
-
         double res = calculadoraService.calcular("+", 1,2 );
         assertEquals(3, res);
 
@@ -17,8 +23,6 @@ class CalculadoraServiceTest {
 
     @Test
     void calcularRestaFailed(){
-        CalculadoraService calculadoraService = new CalculadoraService();
-
         double res = calculadoraService.calcular("-", 3, 1);
         assertNotEquals(5, res);
 
@@ -26,8 +30,6 @@ class CalculadoraServiceTest {
 
     @Test
     void calcularRestaOk(){
-        CalculadoraService calculadoraService = new CalculadoraService();
-
         double res = calculadoraService.calcular("-", 3, 1);
         assertEquals(2, res);
 
@@ -35,8 +37,6 @@ class CalculadoraServiceTest {
 
     @Test
     void calcularMultiplicacionOk(){
-        CalculadoraService calculadoraService = new CalculadoraService();
-
         double res = calculadoraService.calcular("*", 2, 3);
         assertEquals(6, res);
 
@@ -44,8 +44,6 @@ class CalculadoraServiceTest {
 
     @Test
     void calcularDivisionOk(){
-        CalculadoraService calculadoraService = new CalculadoraService();
-
         double res = calculadoraService.calcular("/", 4, 2);
         assertEquals(2, res);
 
@@ -53,9 +51,6 @@ class CalculadoraServiceTest {
 
     @Test
     void CalcularDivisionNotOk(){
-
-        CalculadoraService calculadoraService = new CalculadoraService();
-
         Exception ex = assertThrows(NumberFormatException.class, ()->{
             double res = calculadoraService.calcular("/", 2,0);
         });
@@ -65,9 +60,6 @@ class CalculadoraServiceTest {
 
     @Test
     void CalcularOperationNotOk(){
-
-        CalculadoraService calculadoraService = new CalculadoraService();
-
         Exception ex = assertThrows(NumberFormatException.class, ()->{
             double res = calculadoraService.calcular("$", 2,0);
         });
